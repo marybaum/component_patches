@@ -24,17 +24,22 @@ $timezone_format = _x( 'Y-m-d H:i:s', 'timezone date format' );
 
 add_action( 'admin_head', 'options_general_add_js' );
 
-$options_help = '<p>' . __( 'The fields on this screen determine some of the basics of your site setup.' ) . '</p>' .
-	'<p>' . __( 'Most themes display the site title at the top of every page, in the title bar of the browser, and as the identifying name for syndicated feeds. The tagline is also displayed by many themes.' ) . '</p>';
+$options_help = sprintf( "<p>%s</p><p>%s</p>",
+                         __( 'The fields on this screen determine some of the basics of your site setup.' ),
+                         __( 'Most themes show the site title at the top of every page, in the title bar of the browser, and as the identifying name for syndicated feeds. Many themes also show the tagline.' ) );
 
 if ( ! is_multisite() ) {
-	$options_help .= '<p>' . __( 'The WordPress URL and the site URL can be the same (example.com) or different; for example, having the WordPress core files (example.com/wordpress) in a subdirectory instead of the root directory.' ) . '</p>' .
-		'<p>' . __( 'If you want site visitors to be able to register themselves, as opposed to by the site administrator, check the membership box. A default user role can be set for all new users, whether self-registered or registered by the site admin.' ) . '</p>';
+	$options_help .= sprintf( "<p>%s</p><p>%s</p><p>%s</p><p>%s</p>",
+	                          __( 'Two terms you will want to know are the WordPress URL and the site URL. The WordPress URL is the where the core WordPress installation files are, and the site URL is the address a visitor uses in the browser to get to your site.' ),
+	                          __( 'Though the terms refer to two different concepts, in practice, they can be the same address or different. For example, you can have the WordPress core files in the root directory (https://example.com), in which case the two URLs would be the same. Or the WordPress files can be in a subdirectory (https://example.com/wordpress). In that case, the site URL and the WordPress URL would be different.' ),
+	                          __( 'If you want site visitors to be able to register themselves, check the membership box. If you want the site administrator to register every new user, leave the box unchecked. In both cases, you can set a default user role for all new users, whether they register themselves or a site admin registers them.' ),
+	                          __( 'Both site URLs and WordPress URLs can start with either "http://" or "https://". A URL starting with "https://" will also show a padlock next to the address in the browser address bar. Both of those things signal to visitors that your site is authentic, and the people who run it are real.' ) );
 }
-
-$options_help .= '<p>' . __( 'You can set the language, and the translation files will be automatically downloaded and installed (available if your filesystem is writable).' ) . '</p>' .
-	'<p>' . __( 'UTC means Coordinated Universal Time.' ) . '</p>' .
-	'<p>' . __( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.' ) . '</p>';
+	
+	$options_help .= sprintf( "<p>%s</p><p>%s</p><p>%s</p>",
+	                          __( 'You can set the language, and WordPress will automatically download and install the translation files (available if your filesystem is writable).' ),
+	                          __( 'UTC means Coordinated Universal Time.' ),
+	                          __( 'Remember to save your changes. For new settings to take effect, you must click the Save Changes button at the bottom of the screen.' ) );
 
 get_current_screen()->add_help_tab(
 	array(
